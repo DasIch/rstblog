@@ -5,7 +5,7 @@
 
     Simple latex support for formulas.
 
-    :copyright: (c) 2010 by Armin Ronacher, Georg Brandl.
+    :copyright: (c) 2013 by Armin Ronacher, Georg Brandl.
     :license: BSD, see LICENSE for more details.
 """
 import os

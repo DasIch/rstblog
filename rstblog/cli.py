@@ -5,7 +5,7 @@
 
     The command line interface
 
-    :copyright: (c) 2010 by Armin Ronacher.
+    :copyright: (c) 2013 by Armin Ronacher.
     :license: BSD, see LICENSE for more details.
 """
 from __future__ import with_statement
