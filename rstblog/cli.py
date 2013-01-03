@@ -11,6 +11,7 @@
 from __future__ import with_statement
 import sys
 import os
+from docopt import docopt
 from rstblog.config import Config
 from rstblog.builder import Builder
 
@@ -27,22 +28,35 @@ def get_builder(project_folder):
 
 
 def main():
-    """Entrypoint for the console script."""
-    if len(sys.argv) not in (1, 2, 3):
-        print >> sys.stderr, 'usage: rstblog <action> <folder>'
-    if len(sys.argv) >= 2:
-        action = sys.argv[1]
+    """
+    Usage:
+        run-rstblog
+        run-rstblog build [<folder>]
+        run-rstblog serve [--port <port>] [--host <host>] [<folder>]
+        run-rstblog -h | --help
+
+    Options:
+        -h --help    Show this.
+        --port=port  Port used by server [default: 5000].
+        --host=host  Host used by server [default 127.0.0.1].
+    """
+    arguments = docopt(main.__doc__)
+    if arguments['build']:
+        action = 'build'
+    elif arguments['serve']:
+        action = 'serve'
     else:
         action = 'build'
-    if len(sys.argv) >= 3:
-        folder = sys.argv[2]
-    else:
+    if arguments['<folder>'] is None:
         folder = os.getcwd()
-    if action not in ('build', 'serve'):
-        print >> sys.stderr, 'unknown action', action
-    builder = get_builder(folder)
+    else:
+        folder = arguments['<folder>']
 
+    builder = get_builder(folder)
     if action == 'build':
         builder.run()
     else:
-        builder.debug_serve()
+        builder.debug_serve(
+            port=int(arguments["--port"]),
+            host=arguments["--host"]
+        )
