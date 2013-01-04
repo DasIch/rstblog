@@ -63,7 +63,7 @@ def main():
     if arguments["--interface"]:
         host = get_host(arguments["--interface"])
     else:
-        host = arguments["--host"]
+        host = arguments["--host"] or "localhost"
 
     builder = get_builder(folder)
     if action == 'build':
