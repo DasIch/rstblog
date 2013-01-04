@@ -45,8 +45,8 @@ def main():
     Options:
         -h --help              Show this.
         --port=port            Port used by server [default: 5000].
-        --host=host            Host used by server [default 127.0.0.1].
-        --interface=interface  Use IP of network interface [default: en0].
+        --host=host            Host used by server.
+        --interface=interface  Use IP of network interface.
     """
     arguments = docopt(main.__doc__)
     if arguments['build']:
